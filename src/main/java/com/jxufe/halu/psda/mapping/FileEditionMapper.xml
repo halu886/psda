@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jxufe.halu.psda.mapper.FileEditionMapper" >
+  <resultMap id="BaseResultMap" type="com.jxufe.halu.psda.pojo.FileEdition" >
+    <id column="EditionID" property="editionid" jdbcType="SMALLINT" />
+    <result column="FileID" property="fileid" jdbcType="CHAR" />
+    <result column="FileName" property="filename" jdbcType="VARCHAR" />
+    <result column="FilePath" property="filepath" jdbcType="VARCHAR" />
+    <result column="UploadTime" property="uploadtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    EditionID, FileID, FileName, FilePath, UploadTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Short" >
+    select 
+    <include refid="Base_Column_List" />
+    from fileedition
+    where EditionID = #{editionid,jdbcType=SMALLINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Short" >
+    delete from fileedition
+    where EditionID = #{editionid,jdbcType=SMALLINT}
+  </delete>
+  <insert id="insert" parameterType="com.jxufe.halu.psda.pojo.FileEdition" >
+    insert into fileedition (EditionID, FileID, FileName, 
+      FilePath, UploadTime)
+    values (#{editionid,jdbcType=SMALLINT}, #{fileid,jdbcType=CHAR}, #{filename,jdbcType=VARCHAR}, 
+      #{filepath,jdbcType=VARCHAR}, #{uploadtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jxufe.halu.psda.pojo.FileEdition" >
+    insert into fileedition
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="editionid != null" >
+        EditionID,
+      </if>
+      <if test="fileid != null" >
+        FileID,
+      </if>
+      <if test="filename != null" >
+        FileName,
+      </if>
+      <if test="filepath != null" >
+        FilePath,
+      </if>
+      <if test="uploadtime != null" >
+        UploadTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="editionid != null" >
+        #{editionid,jdbcType=SMALLINT},
+      </if>
+      <if test="fileid != null" >
+        #{fileid,jdbcType=CHAR},
+      </if>
+      <if test="filename != null" >
+        #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="filepath != null" >
+        #{filepath,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadtime != null" >
+        #{uploadtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jxufe.halu.psda.pojo.FileEdition" >
+    update fileedition
+    <set >
+      <if test="fileid != null" >
+        FileID = #{fileid,jdbcType=CHAR},
+      </if>
+      <if test="filename != null" >
+        FileName = #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="filepath != null" >
+        FilePath = #{filepath,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadtime != null" >
+        UploadTime = #{uploadtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where EditionID = #{editionid,jdbcType=SMALLINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jxufe.halu.psda.pojo.FileEdition" >
+    update fileedition
+    set FileID = #{fileid,jdbcType=CHAR},
+      FileName = #{filename,jdbcType=VARCHAR},
+      FilePath = #{filepath,jdbcType=VARCHAR},
+      UploadTime = #{uploadtime,jdbcType=TIMESTAMP}
+    where EditionID = #{editionid,jdbcType=SMALLINT}
+  </update>
+</mapper>

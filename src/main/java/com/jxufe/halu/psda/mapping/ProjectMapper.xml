@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jxufe.halu.psda.mapper.ProjectMapper" >
+  <resultMap id="BaseResultMap" type="com.jxufe.halu.psda.pojo.Project" >
+    <id column="ProjectID" property="projectid" jdbcType="CHAR" />
+    <result column="PProjectID" property="pprojectid" jdbcType="CHAR" />
+    <result column="GroupID" property="groupid" jdbcType="CHAR" />
+    <result column="DepartID" property="departid" jdbcType="CHAR" />
+    <result column="ClassID" property="classid" jdbcType="CHAR" />
+    <result column="UserID" property="userid" jdbcType="CHAR" />
+    <result column="ProjectName" property="projectname" jdbcType="VARCHAR" />
+    <result column="Requirement" property="requirement" jdbcType="VARCHAR" />
+    <result column="Target" property="target" jdbcType="VARCHAR" />
+    <result column="StepPlan" property="stepplan" jdbcType="CHAR" />
+    <result column="StepDo" property="stepdo" jdbcType="CHAR" />
+    <result column="StepCheck" property="stepcheck" jdbcType="CHAR" />
+    <result column="StepAdapt" property="stepadapt" jdbcType="CHAR" />
+    <result column="ProcessRatio" property="processratio" jdbcType="SMALLINT" />
+    <result column="BeginTime" property="begintime" jdbcType="TIMESTAMP" />
+    <result column="ScheduleEndTime" property="scheduleendtime" jdbcType="TIMESTAMP" />
+    <result column="FinishTime" property="finishtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ProjectID, PProjectID, GroupID, DepartID, ClassID, UserID, ProjectName, Requirement, 
+    Target, StepPlan, StepDo, StepCheck, StepAdapt, ProcessRatio, BeginTime, ScheduleEndTime, 
+    FinishTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from project
+    where ProjectID = #{projectid,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from project
+    where ProjectID = #{projectid,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.jxufe.halu.psda.pojo.Project" >
+    insert into project (ProjectID, PProjectID, GroupID, 
+      DepartID, ClassID, UserID, ProjectName, 
+      Requirement, Target, StepPlan, 
+      StepDo, StepCheck, StepAdapt, 
+      ProcessRatio, BeginTime, ScheduleEndTime, 
+      FinishTime)
+    values (#{projectid,jdbcType=CHAR}, #{pprojectid,jdbcType=CHAR}, #{groupid,jdbcType=CHAR}, 
+      #{departid,jdbcType=CHAR}, #{classid,jdbcType=CHAR}, #{userid,jdbcType=CHAR}, #{projectname,jdbcType=VARCHAR}, 
+      #{requirement,jdbcType=VARCHAR}, #{target,jdbcType=VARCHAR}, #{stepplan,jdbcType=CHAR}, 
+      #{stepdo,jdbcType=CHAR}, #{stepcheck,jdbcType=CHAR}, #{stepadapt,jdbcType=CHAR}, 
+      #{processratio,jdbcType=SMALLINT}, #{begintime,jdbcType=TIMESTAMP}, #{scheduleendtime,jdbcType=TIMESTAMP}, 
+      #{finishtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jxufe.halu.psda.pojo.Project" >
+    insert into project
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="projectid != null" >
+        ProjectID,
+      </if>
+      <if test="pprojectid != null" >
+        PProjectID,
+      </if>
+      <if test="groupid != null" >
+        GroupID,
+      </if>
+      <if test="departid != null" >
+        DepartID,
+      </if>
+      <if test="classid != null" >
+        ClassID,
+      </if>
+      <if test="userid != null" >
+        UserID,
+      </if>
+      <if test="projectname != null" >
+        ProjectName,
+      </if>
+      <if test="requirement != null" >
+        Requirement,
+      </if>
+      <if test="target != null" >
+        Target,
+      </if>
+      <if test="stepplan != null" >
+        StepPlan,
+      </if>
+      <if test="stepdo != null" >
+        StepDo,
+      </if>
+      <if test="stepcheck != null" >
+        StepCheck,
+      </if>
+      <if test="stepadapt != null" >
+        StepAdapt,
+      </if>
+      <if test="processratio != null" >
+        ProcessRatio,
+      </if>
+      <if test="begintime != null" >
+        BeginTime,
+      </if>
+      <if test="scheduleendtime != null" >
+        ScheduleEndTime,
+      </if>
+      <if test="finishtime != null" >
+        FinishTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="projectid != null" >
+        #{projectid,jdbcType=CHAR},
+      </if>
+      <if test="pprojectid != null" >
+        #{pprojectid,jdbcType=CHAR},
+      </if>
+      <if test="groupid != null" >
+        #{groupid,jdbcType=CHAR},
+      </if>
+      <if test="departid != null" >
+        #{departid,jdbcType=CHAR},
+      </if>
+      <if test="classid != null" >
+        #{classid,jdbcType=CHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=CHAR},
+      </if>
+      <if test="projectname != null" >
+        #{projectname,jdbcType=VARCHAR},
+      </if>
+      <if test="requirement != null" >
+        #{requirement,jdbcType=VARCHAR},
+      </if>
+      <if test="target != null" >
+        #{target,jdbcType=VARCHAR},
+      </if>
+      <if test="stepplan != null" >
+        #{stepplan,jdbcType=CHAR},
+      </if>
+      <if test="stepdo != null" >
+        #{stepdo,jdbcType=CHAR},
+      </if>
+      <if test="stepcheck != null" >
+        #{stepcheck,jdbcType=CHAR},
+      </if>
+      <if test="stepadapt != null" >
+        #{stepadapt,jdbcType=CHAR},
+      </if>
+      <if test="processratio != null" >
+        #{processratio,jdbcType=SMALLINT},
+      </if>
+      <if test="begintime != null" >
+        #{begintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="scheduleendtime != null" >
+        #{scheduleendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finishtime != null" >
+        #{finishtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jxufe.halu.psda.pojo.Project" >
+    update project
+    <set >
+      <if test="pprojectid != null" >
+        PProjectID = #{pprojectid,jdbcType=CHAR},
+      </if>
+      <if test="groupid != null" >
+        GroupID = #{groupid,jdbcType=CHAR},
+      </if>
+      <if test="departid != null" >
+        DepartID = #{departid,jdbcType=CHAR},
+      </if>
+      <if test="classid != null" >
+        ClassID = #{classid,jdbcType=CHAR},
+      </if>
+      <if test="userid != null" >
+        UserID = #{userid,jdbcType=CHAR},
+      </if>
+      <if test="projectname != null" >
+        ProjectName = #{projectname,jdbcType=VARCHAR},
+      </if>
+      <if test="requirement != null" >
+        Requirement = #{requirement,jdbcType=VARCHAR},
+      </if>
+      <if test="target != null" >
+        Target = #{target,jdbcType=VARCHAR},
+      </if>
+      <if test="stepplan != null" >
+        StepPlan = #{stepplan,jdbcType=CHAR},
+      </if>
+      <if test="stepdo != null" >
+        StepDo = #{stepdo,jdbcType=CHAR},
+      </if>
+      <if test="stepcheck != null" >
+        StepCheck = #{stepcheck,jdbcType=CHAR},
+      </if>
+      <if test="stepadapt != null" >
+        StepAdapt = #{stepadapt,jdbcType=CHAR},
+      </if>
+      <if test="processratio != null" >
+        ProcessRatio = #{processratio,jdbcType=SMALLINT},
+      </if>
+      <if test="begintime != null" >
+        BeginTime = #{begintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="scheduleendtime != null" >
+        ScheduleEndTime = #{scheduleendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finishtime != null" >
+        FinishTime = #{finishtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ProjectID = #{projectid,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jxufe.halu.psda.pojo.Project" >
+    update project
+    set PProjectID = #{pprojectid,jdbcType=CHAR},
+      GroupID = #{groupid,jdbcType=CHAR},
+      DepartID = #{departid,jdbcType=CHAR},
+      ClassID = #{classid,jdbcType=CHAR},
+      UserID = #{userid,jdbcType=CHAR},
+      ProjectName = #{projectname,jdbcType=VARCHAR},
+      Requirement = #{requirement,jdbcType=VARCHAR},
+      Target = #{target,jdbcType=VARCHAR},
+      StepPlan = #{stepplan,jdbcType=CHAR},
+      StepDo = #{stepdo,jdbcType=CHAR},
+      StepCheck = #{stepcheck,jdbcType=CHAR},
+      StepAdapt = #{stepadapt,jdbcType=CHAR},
+      ProcessRatio = #{processratio,jdbcType=SMALLINT},
+      BeginTime = #{begintime,jdbcType=TIMESTAMP},
+      ScheduleEndTime = #{scheduleendtime,jdbcType=TIMESTAMP},
+      FinishTime = #{finishtime,jdbcType=TIMESTAMP}
+    where ProjectID = #{projectid,jdbcType=CHAR}
+  </update>
+</mapper>

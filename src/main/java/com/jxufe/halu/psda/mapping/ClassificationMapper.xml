@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jxufe.halu.psda.mapper.ClassificationMapper" >
+  <resultMap id="BaseResultMap" type="com.jxufe.halu.psda.pojo.Classification" >
+    <id column="ClassID" property="classid" jdbcType="CHAR" />
+    <result column="ClassName" property="classname" jdbcType="VARCHAR" />
+    <result column="PClassID" property="pclassid" jdbcType="CHAR" />
+    <result column="UserID" property="userid" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ClassID, ClassName, PClassID, UserID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from classification
+    where ClassID = #{classid,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from classification
+    where ClassID = #{classid,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.jxufe.halu.psda.pojo.Classification" >
+    insert into classification (ClassID, ClassName, PClassID, 
+      UserID)
+    values (#{classid,jdbcType=CHAR}, #{classname,jdbcType=VARCHAR}, #{pclassid,jdbcType=CHAR}, 
+      #{userid,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jxufe.halu.psda.pojo.Classification" >
+    insert into classification
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="classid != null" >
+        ClassID,
+      </if>
+      <if test="classname != null" >
+        ClassName,
+      </if>
+      <if test="pclassid != null" >
+        PClassID,
+      </if>
+      <if test="userid != null" >
+        UserID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="classid != null" >
+        #{classid,jdbcType=CHAR},
+      </if>
+      <if test="classname != null" >
+        #{classname,jdbcType=VARCHAR},
+      </if>
+      <if test="pclassid != null" >
+        #{pclassid,jdbcType=CHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jxufe.halu.psda.pojo.Classification" >
+    update classification
+    <set >
+      <if test="classname != null" >
+        ClassName = #{classname,jdbcType=VARCHAR},
+      </if>
+      <if test="pclassid != null" >
+        PClassID = #{pclassid,jdbcType=CHAR},
+      </if>
+      <if test="userid != null" >
+        UserID = #{userid,jdbcType=CHAR},
+      </if>
+    </set>
+    where ClassID = #{classid,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jxufe.halu.psda.pojo.Classification" >
+    update classification
+    set ClassName = #{classname,jdbcType=VARCHAR},
+      PClassID = #{pclassid,jdbcType=CHAR},
+      UserID = #{userid,jdbcType=CHAR}
+    where ClassID = #{classid,jdbcType=CHAR}
+  </update>
+</mapper>

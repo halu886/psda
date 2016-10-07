@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jxufe.halu.psda.mapper.PUserMapper" >
+  <resultMap id="BaseResultMap" type="com.jxufe.halu.psda.pojo.PUser" >
+    <id column="UserID" property="userid" jdbcType="CHAR" />
+    <result column="DepartID" property="departid" jdbcType="CHAR" />
+    <result column="GroupName" property="groupname" jdbcType="VARCHAR" />
+    <result column="Password" property="password" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    UserID, DepartID, GroupName, Password
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from puser
+    where UserID = #{userid,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from puser
+    where UserID = #{userid,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.jxufe.halu.psda.pojo.PUser" >
+    insert into puser (UserID, DepartID, GroupName, 
+      Password)
+    values (#{userid,jdbcType=CHAR}, #{departid,jdbcType=CHAR}, #{groupname,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jxufe.halu.psda.pojo.PUser" >
+    insert into puser
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        UserID,
+      </if>
+      <if test="departid != null" >
+        DepartID,
+      </if>
+      <if test="groupname != null" >
+        GroupName,
+      </if>
+      <if test="password != null" >
+        Password,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=CHAR},
+      </if>
+      <if test="departid != null" >
+        #{departid,jdbcType=CHAR},
+      </if>
+      <if test="groupname != null" >
+        #{groupname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jxufe.halu.psda.pojo.PUser" >
+    update puser
+    <set >
+      <if test="departid != null" >
+        DepartID = #{departid,jdbcType=CHAR},
+      </if>
+      <if test="groupname != null" >
+        GroupName = #{groupname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        Password = #{password,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where UserID = #{userid,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jxufe.halu.psda.pojo.PUser" >
+    update puser
+    set DepartID = #{departid,jdbcType=CHAR},
+      GroupName = #{groupname,jdbcType=VARCHAR},
+      Password = #{password,jdbcType=VARCHAR}
+    where UserID = #{userid,jdbcType=CHAR}
+  </update>
+</mapper>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jxufe.halu.psda.mapper.PdepartMapper" >
+  <resultMap id="BaseResultMap" type="com.jxufe.halu.psda.pojo.Pdepart" >
+    <id column="DepartID" property="departid" jdbcType="CHAR" />
+    <result column="DepartName" property="departname" jdbcType="VARCHAR" />
+    <result column="PDepartID" property="pdepartid" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    DepartID, DepartName, PDepartID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from pdepart
+    where DepartID = #{departid,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from pdepart
+    where DepartID = #{departid,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.jxufe.halu.psda.pojo.Pdepart" >
+    insert into pdepart (DepartID, DepartName, PDepartID
+      )
+    values (#{departid,jdbcType=CHAR}, #{departname,jdbcType=VARCHAR}, #{pdepartid,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jxufe.halu.psda.pojo.Pdepart" >
+    insert into pdepart
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="departid != null" >
+        DepartID,
+      </if>
+      <if test="departname != null" >
+        DepartName,
+      </if>
+      <if test="pdepartid != null" >
+        PDepartID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="departid != null" >
+        #{departid,jdbcType=CHAR},
+      </if>
+      <if test="departname != null" >
+        #{departname,jdbcType=VARCHAR},
+      </if>
+      <if test="pdepartid != null" >
+        #{pdepartid,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jxufe.halu.psda.pojo.Pdepart" >
+    update pdepart
+    <set >
+      <if test="departname != null" >
+        DepartName = #{departname,jdbcType=VARCHAR},
+      </if>
+      <if test="pdepartid != null" >
+        PDepartID = #{pdepartid,jdbcType=CHAR},
+      </if>
+    </set>
+    where DepartID = #{departid,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jxufe.halu.psda.pojo.Pdepart" >
+    update pdepart
+    set DepartName = #{departname,jdbcType=VARCHAR},
+      PDepartID = #{pdepartid,jdbcType=CHAR}
+    where DepartID = #{departid,jdbcType=CHAR}
+  </update>
+</mapper>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jxufe.halu.psda.mapper.JoinMapper" >
+  <resultMap id="BaseResultMap" type="com.jxufe.halu.psda.pojo.Join" >
+    <id column="UserID" property="userid" jdbcType="CHAR" />
+    <id column="GroupID" property="groupid" jdbcType="CHAR" />
+    <result column="JoinTime" property="jointime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    UserID, GroupID, JoinTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.jxufe.halu.psda.pojo.JoinKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from join
+    where UserID = #{userid,jdbcType=CHAR}
+      and GroupID = #{groupid,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.jxufe.halu.psda.pojo.JoinKey" >
+    delete from join
+    where UserID = #{userid,jdbcType=CHAR}
+      and GroupID = #{groupid,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.jxufe.halu.psda.pojo.Join" >
+    insert into join (UserID, GroupID, JoinTime
+      )
+    values (#{userid,jdbcType=CHAR}, #{groupid,jdbcType=CHAR}, #{jointime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jxufe.halu.psda.pojo.Join" >
+    insert into join
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        UserID,
+      </if>
+      <if test="groupid != null" >
+        GroupID,
+      </if>
+      <if test="jointime != null" >
+        JoinTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=CHAR},
+      </if>
+      <if test="groupid != null" >
+        #{groupid,jdbcType=CHAR},
+      </if>
+      <if test="jointime != null" >
+        #{jointime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jxufe.halu.psda.pojo.Join" >
+    update join
+    <set >
+      <if test="jointime != null" >
+        JoinTime = #{jointime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where UserID = #{userid,jdbcType=CHAR}
+      and GroupID = #{groupid,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jxufe.halu.psda.pojo.Join" >
+    update join
+    set JoinTime = #{jointime,jdbcType=TIMESTAMP}
+    where UserID = #{userid,jdbcType=CHAR}
+      and GroupID = #{groupid,jdbcType=CHAR}
+  </update>
+</mapper>

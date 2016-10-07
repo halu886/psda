@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jxufe.halu.psda.mapper.PfileMapper" >
+  <resultMap id="BaseResultMap" type="com.jxufe.halu.psda.pojo.Pfile" >
+    <id column="FileID" property="fileid" jdbcType="CHAR" />
+    <result column="ProjectID" property="projectid" jdbcType="CHAR" />
+    <result column="UserID" property="userid" jdbcType="CHAR" />
+    <result column="GroupID" property="groupid" jdbcType="CHAR" />
+    <result column="FileName" property="filename" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    FileID, ProjectID, UserID, GroupID, FileName
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from pfile
+    where FileID = #{fileid,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from pfile
+    where FileID = #{fileid,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.jxufe.halu.psda.pojo.Pfile" >
+    insert into pfile (FileID, ProjectID, UserID, 
+      GroupID, FileName)
+    values (#{fileid,jdbcType=CHAR}, #{projectid,jdbcType=CHAR}, #{userid,jdbcType=CHAR}, 
+      #{groupid,jdbcType=CHAR}, #{filename,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jxufe.halu.psda.pojo.Pfile" >
+    insert into pfile
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fileid != null" >
+        FileID,
+      </if>
+      <if test="projectid != null" >
+        ProjectID,
+      </if>
+      <if test="userid != null" >
+        UserID,
+      </if>
+      <if test="groupid != null" >
+        GroupID,
+      </if>
+      <if test="filename != null" >
+        FileName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fileid != null" >
+        #{fileid,jdbcType=CHAR},
+      </if>
+      <if test="projectid != null" >
+        #{projectid,jdbcType=CHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=CHAR},
+      </if>
+      <if test="groupid != null" >
+        #{groupid,jdbcType=CHAR},
+      </if>
+      <if test="filename != null" >
+        #{filename,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jxufe.halu.psda.pojo.Pfile" >
+    update pfile
+    <set >
+      <if test="projectid != null" >
+        ProjectID = #{projectid,jdbcType=CHAR},
+      </if>
+      <if test="userid != null" >
+        UserID = #{userid,jdbcType=CHAR},
+      </if>
+      <if test="groupid != null" >
+        GroupID = #{groupid,jdbcType=CHAR},
+      </if>
+      <if test="filename != null" >
+        FileName = #{filename,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where FileID = #{fileid,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jxufe.halu.psda.pojo.Pfile" >
+    update pfile
+    set ProjectID = #{projectid,jdbcType=CHAR},
+      UserID = #{userid,jdbcType=CHAR},
+      GroupID = #{groupid,jdbcType=CHAR},
+      FileName = #{filename,jdbcType=VARCHAR}
+    where FileID = #{fileid,jdbcType=CHAR}
+  </update>
+</mapper>
