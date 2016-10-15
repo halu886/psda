@@ -232,4 +232,11 @@
       FinishTime = #{finishtime,jdbcType=TIMESTAMP}
     where ProjectID = #{projectid,jdbcType=CHAR}
   </update>
+  
+    <!-- 分页SQL语句 -->
+  <select id="selectTaskByPage" resultMap="com.jxufe.halu.psda.pojo.Project">
+    select 
+    *
+    from project limit #{startPos},#{pageSize} 
+  </select>
 </mapper>

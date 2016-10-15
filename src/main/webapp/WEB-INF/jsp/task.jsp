@@ -12,23 +12,8 @@
 <title>Insert title here</title>
 <script>
 	var url;
-	function deleteTask() {
-		var row=$('#dg').datagrid('getSelected');
-		if('row'){
-			$.messager.confirm("系统提示","您确定要删除这条记录吗?",fuction(r){
-				if(r){
-					$.post('useDelete',{delId:row.id},function(result){
-						if(result.success){
-							$.messager.alter("系统提示","你已经成功删除这条记录");
-							$('#dg').datagrid("reload");
-						}else{
-							$.messager.alert("系统提示",result.errorMsg);
-						}
-					},'json');
-				}
-			});
-		}
-	}
+	
+	$('#dg').datagird('reload');
 	
 	function newTask(){
 		$("#dlg").dialog('open').dialog("setTitle",'添加任务');
@@ -64,17 +49,35 @@
 			}
 		})
 	} 
+	
+	<%--function deleteTask() {
+		var row=$('#dg').datagrid('getSelected');
+		if('row'){
+			$.messager.confirm('系统提示','您确定要删除这条记录吗?',fuction(r){
+				if(r){
+					$.post('useDelete',{delId:row.id},function(result){
+						if(result.success){
+							$.messager.alter("系统提示","你已经成功删除这条记录");
+							$('#dg').datagrid("reload");
+						}else{
+							$.messager.alert("系统提示",result.errorMsg);
+						}
+					},'json');
+				}
+			});
+		}
+	}--%>
 </script>
 </head>
 <body>
 	<table id="dg" title="任务" class="easyui-datagrid"
-	pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
+	pagination="true" rownumbers="true" fitColumns="true" singleSelect="true"  url="taskController/taskList" >
 		<thead>
 			<tr>
-				<th field="id" width="50" hidden="true">ID</th>
-				<th field="name" width="50">Name</th>
-				<th field="pId" width="50">PId</th>
-				<th field="use" width="50">User</th>
+				<th field="projectid" width="50" hidden="true">ID</th>
+				<th field="projectname" width="50">Name</th>
+				<th field="pprojected" width="50">PId</th>
+				<th field="userid" width="50">User</th>
 			</tr>
 		</thead>
 	</table>
@@ -89,26 +92,26 @@
 			<table cellspacing="10px;">
 				<tr>
 					<td>任务ID</td>
-					<td><input name="name" class="easyui-validatebox" required="true"></td>
+					<td><input name="projectid" class="easyui-validatebox" required="true"></td>
 				</tr>	
 				<tr>
 					<td>任务Name</td>
-					<td><input name="name" class="easyui-validatebox" required="true"></td>
+					<td><input name="projectname" class="easyui-validatebox" required="true"></td>
 				</tr>
 				<tr>
 					<td>父任务ID</td>
-					<td><input name="name" class="easyui-validatebox" required="true"></td>
+					<td><input name="pprojected" class="easyui-validatebox" required="true"></td>
 				</tr>
 				<tr>
 					<td>UserID</td>
-					<td><input name="name" class="easyui-validatebox" required="true"></td>
+					<td><input name="userid" class="easyui-validatebox" required="true"></td>
 				</tr>
 			</table> 
 		</form>	
-	</div>
-	<div id="dlg-buttons">
+		<div id="dlg-buttons">
 		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveTask()">保存</a>
 		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">保存</a>		
+	</div>
 	</div>
 </body>
 </html>
