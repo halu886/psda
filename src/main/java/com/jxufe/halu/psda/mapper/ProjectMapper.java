@@ -18,11 +18,6 @@ public interface ProjectMapper {
     int updateByPrimaryKeySelective(Project record);
 
     int updateByPrimaryKey(Project record);
-    
-    /**
-     * @param page
-     * @param userId
-     */
-    public List<Project> selectProductsByPage(@Param(value="startPos") Integer startPos,
-    		@Param(value="pageSize") Integer pageSize);
+
+    public List<Project> selectProjectsByPage(@Param("startPos")int startPos,@Param("pageSize")int pageSize);
 }

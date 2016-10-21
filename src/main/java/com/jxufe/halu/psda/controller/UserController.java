@@ -19,7 +19,7 @@ public class UserController {
 	
 	@RequestMapping("/showUser")
 	public String toIndex(HttpServletRequest request,Model model){
-		PUser user = this.pUserMapper.selectByPrimaryKey(request.getParameter("id"));
+		PUser user = this.pUserMapper.selectByPrimaryKey("1");
 		model.addAttribute("user", user);
 		return "user";
 	}

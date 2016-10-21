@@ -1,24 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link rel='stylesheet' type='text/css' href='plugin/easyUI/themes/default/easyui.css'>
-<link rel='stylesheet' type='text/css' href='plugin/easyUI/themes/icon.css'>
-<link rel='stylesheet' type='text/css' href='plugin/easyUI/demo/demo.css'>
-<script type="text/javascript" src="plugin/easyUI/jquery.min.js"></script>
-<script type="text/javascript" src="plugin/easyUI/jquery.easyui.min.js"></script>
+<link rel='stylesheet' type='text/css' href='<c:url value="/plugin/easyUI/themes/default/easyui.css"></c:url>'>
+<link rel='stylesheet' type='text/css' href='<c:url value="/plugin/easyUI/themes/icon.css"></c:url>'>
+<link rel='stylesheet' type='text/css' href='<c:url value="/plugin/easyUI/demo/demo.css"></c:url>'>
+<script type="text/javascript" src='<c:url value="/plugin/easyUI/jquery.min.js"></c:url>'></script>
+<script type="text/javascript" src='<c:url value="/plugin/easyUI/jquery.easyui.min.js"></c:url>'></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Insert title here</title> 
 <script>
 	var url;
 	
-	$('#dg').datagird('reload');
+	<%--$('#dg').datagird('reload');--%>
 	
 	function newTask(){
 		$("#dlg").dialog('open').dialog("setTitle",'添加任务');
 		$("#fm").form('clean');
-		url='taskServer';
+		url='taskController/addTask';
 	}
 	
 	function editTask() {
@@ -31,10 +32,11 @@
 	}
 	
 	function saveTask(){
-		$('#fm').form(submit,{
-			url:url,
+		$('#fm').form('submit',{
+			url:'taskController/addTask',
 			onSubmit:function(){
-				return $(this).form("validate");
+				<%--return $(this).form("validate");--%>
+				return true;
 			},
 			success:function(result){
 				var result= eval('('+result+')');//待测试

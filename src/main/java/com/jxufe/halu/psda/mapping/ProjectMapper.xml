@@ -233,10 +233,9 @@
     where ProjectID = #{projectid,jdbcType=CHAR}
   </update>
   
-    <!-- 分页SQL语句 -->
-  <select id="selectTaskByPage" resultMap="com.jxufe.halu.psda.pojo.Project">
+  <select id="selectProjectsByPage" resultMap="BaseResultMap" parameterType="map">
     select 
     *
-    from project limit #{startPos},#{pageSize} 
+    from project limit #{startPos},#{pageSize}
   </select>
 </mapper>
