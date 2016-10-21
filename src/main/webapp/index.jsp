@@ -50,12 +50,12 @@ pageEncoding="UTF-8"%>
 		})
 	} 
 	
-	function deleteTask() {
+	function deleteProject() {
 		var row=$('#dg').datagrid('getSelected');
-		if('row'){
+		if(row){
 			$.messager.confirm("系统提示","您确定要删除这条记录吗?",function(r){
 				if(r){
-					$.post('useDelete',{delId:row.id},function(result){
+					$.post('projectController/projectDelete',row,function(result){
 						if(result.success){
 							$.messager.alter("系统提示","你已经成功删除这条记录");
 							$('#dg').datagrid("reload");

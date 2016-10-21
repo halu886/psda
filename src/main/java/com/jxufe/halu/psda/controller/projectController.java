@@ -81,4 +81,20 @@ public class projectController {
 		printWriter.flush();
 		printWriter.close();
 	}
+	
+	@RequestMapping("/projectDelete")
+	@POST
+	public void projectDelete(HttpServletRequest request,
+			HttpServletResponse response,Project project) throws IOException{
+		JSONObject json = new JSONObject();
+		if(projectMapper.deleteByPrimaryKey(project.getProjectid())==0){
+			json.put("errorMSG", "É¾³ýÊ§°Ü");
+		}else {
+			json.put("success",true);
+		}
+		PrintWriter printWriter = response.getWriter();
+		printWriter.println(json.toString());
+		printWriter.flush();
+		printWriter.close();
+	}
 }
