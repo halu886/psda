@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8"%>
 <html>
 <head>
 <link rel='stylesheet' type='text/css' href='plugin/easyUI/themes/default/easyui.css'>
@@ -13,31 +13,31 @@
 <script>
 	var url;
 	
-	$('#dg').datagird('reload');
+	$('#dg').datagrid('reload');
 	
-	function newTask(){
-		$("#dlg").dialog('open').dialog("setTitle",'添加任务');
-		$("#fm").form("clean");
-		url='taskController/addTask';
+	function newProject(){
+		url="projectController/addProject";
+		$('#dlg').dialog('open').dialog("setTitle",'添加任务');
+		$('#fm').form('reset');
 	}
 	
-	function editTask() {
+	function editProject() {
 		var row = $('#dg').datagrid('getSelected');
 		if(row){
 			$('#dlg').dialog('open').dialog("setTitle","编辑用户");
 			$('#fm').form('load',row);
-			url="taskServises?id="+row.id;
+			url="projectController/editProject?id="+row.id;
 		}
 	}
 	
-	function saveTask(){
+	function saveProject(){
 		$('#fm').form('submit',{
-			url:'projectController/addProject',
+			url:url,
 			onSubmit:function(){
 				return true;
 			},
 			success:function(result){
-// 				var result= eval('('+result+')');//待测试
+ 				var result= eval('('+result+')');//待测试
 				if(result.errorMsg){
 					$.messager.alert("系统提示",result.errroMsg);
 					return;
@@ -50,10 +50,10 @@
 		})
 	} 
 	
-	<%--function deleteTask() {
+	function deleteTask() {
 		var row=$('#dg').datagrid('getSelected');
 		if('row'){
-			$.messager.confirm('系统提示','您确定要删除这条记录吗?',fuction(r){
+			$.messager.confirm("系统提示","您确定要删除这条记录吗?",function(r){
 				if(r){
 					$.post('useDelete',{delId:row.id},function(result){
 						if(result.success){
@@ -62,11 +62,11 @@
 						}else{
 							$.messager.alert("系统提示",result.errorMsg);
 						}
-					},'json');
+					});
 				}
 			});
 		}
-	}--%>
+	}
 </script>
 </head>
 <body>
@@ -82,9 +82,9 @@
 		</thead>
 	</table>
 	    <div id="toolbar">  
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newTask()">添加用户</a>  
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editTask()">编辑用户</a>  
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="deleteTask()">删除用户</a>  
+        <a href="javascript:void(0);" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newProject()">添加用户</a>  
+        <a href="javascript:void(0);" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editProject()">编辑用户</a>  
+        <a href="javascript:void(0);" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="deleteProject()">删除用户</a>  
     </div>  
 	<div id="dlg" class="easyui-dialog" style="width:400px;height:250px;padding:10px 20px"
 	closed="true" bottons="#dlg-buttons">
@@ -109,8 +109,8 @@
 			</table> 
 		</form>	
 		<div id="dlg-buttons">
-		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveTask()">保存</a>
-		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">保存</a>		
+		<a href="javascript:void(0);" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveProject()">保存</a>
+		<a href="javascript:void(0);" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">取消</a>		
 	</div>
 	</div>
 </body>

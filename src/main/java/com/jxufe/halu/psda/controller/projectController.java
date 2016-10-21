@@ -10,6 +10,7 @@ import javax.json.JsonObject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.POST;
+import javax.ws.rs.PathParam;
 
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
@@ -39,6 +40,24 @@ public class projectController {
 		} else{
 			projectMapper.insert(project);
 			json.put("errorMsg", "新建用户成功");
+			json.put("Success",true);
+		}
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter printWriter = response.getWriter();
+		printWriter.println(json.toString());
+		printWriter.flush();
+		printWriter.close();
+		return null;
+	}
+	
+	@RequestMapping("/editProject")
+	public String editProject(HttpServletRequest request,  
+            HttpServletResponse response,@PathParam("id")String id,Project project) throws IOException{
+		JSONObject json = new JSONObject();
+		if(projectMapper.updateByPrimaryKey(project)==0){
+			json.put("errorMsg", "修改用户以失败");
+		} else{
+			json.put("Msg", "修改用户成功");
 			json.put("Success",true);
 		}
 		response.setContentType("text/html;charset=utf-8");
