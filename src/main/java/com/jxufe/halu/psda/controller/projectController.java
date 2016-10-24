@@ -14,6 +14,7 @@ import javax.ws.rs.PathParam;
 
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -35,11 +36,11 @@ public class projectController {
 	public String  saveTask(Project project,HttpServletRequest request, 
 			HttpServletResponse response) throws IOException {
 		JSONObject json = new JSONObject();
-		if(projectMapper.selectByPrimaryKey(project.getProjectid())==null){
+		if(projectMapper.selectByPrimaryKey(project.getProjectid())!=null){
 			json.put("errorMsg", "新建用户以失败,用户已存在");
 		} else{
 			projectMapper.insert(project);
-			json.put("errorMsg", "新建用户成功");
+			json.put("Msg", "新建用户成功");
 			json.put("Success",true);
 		}
 		response.setContentType("text/html;charset=utf-8");
@@ -68,16 +69,22 @@ public class projectController {
 		return null;
 	}
 	
+	/*
+	 * @说明：分页
+	 */
 	@RequestMapping("/projectList")
-	public void taskList(HttpServletRequest request,  
-            HttpServletResponse response) throws IOException {
-		int page = ServletRequestUtils.getIntParameter(request, "page", 0);
-		int row = ServletRequestUtils.getIntParameter(request, "row", 1);
-		List<Project> projects = projectMapper.selectProjectsByPage(--	page, row);
+	public void projectList(HttpServletRequest request,  
+            HttpServletResponse response) throws Exception {
+		int page = ServletRequestUtils.getIntParameter(request, "page");
+		int row = ServletRequestUtils.getIntParameter(request, "rows");
+		List<Project> projects = projectMapper.selectProjectsByPage((--	page)*row, row);//获取满足的条件的数据从(--	page)*row开始，获取row
 		JSONArray jsonArray = (JSONArray)JSONArray.toJSON(projects);
+		JSONObject result = new JSONObject();
+		result.put("rows", jsonArray);
+		result.put("total", projects.size());
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter printWriter = response.getWriter();
-		printWriter.println(jsonArray.toString());
+		printWriter.println(result);
 		printWriter.flush();
 		printWriter.close();
 	}

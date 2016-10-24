@@ -39,12 +39,12 @@ pageEncoding="UTF-8"%>
 			success:function(result){
  				var result= eval('('+result+')');//待测试
 				if(result.errorMsg){
-					$.messager.alert("系统提示",result.errroMsg);
+					$.messager.alert("系统提示",result.errorMsg);
 					return;
 				} else{
-					$.messager.alert("系统提示","保存成功");
+					$.messager.alert("系统提示",result.Msg);
 					$('#dlg').dialog('close');
-					$('#dg').datagird('reload');
+					$('#dg').datagrid('reload');
 				}
 			}
 		})
@@ -60,7 +60,7 @@ pageEncoding="UTF-8"%>
 							$.messager.alter("系统提示","你已经成功删除这条记录");
 							$('#dg').datagrid("reload");
 						}else{
-							$.messager.alert("系统提示",result.errorMsg);
+							$.messager.alert("系统提示",result[errorMsg]);
 						}
 					});
 				}
@@ -75,9 +75,9 @@ pageEncoding="UTF-8"%>
 		<thead>
 			<tr>
 				<th field="groupid" width="50" hidden="true">ID</th>
-				<th field="departid" width="50">deparID</th>
-				<th field="classid" width="50">classID</th>
-				<th field="pprojectid" width="50">PProjectID</th>
+				<th field="projectid" width="50">deparID</th>
+				<th field="projectname" width="50">classID</th>
+				<th field="userid" width="50">PProjectID</th>
 			</tr>
 		</thead>
 	</table>
@@ -95,15 +95,15 @@ pageEncoding="UTF-8"%>
 					<td><input name="projectid" class="easyui-validatebox" required="true"></td>
 				</tr>	
 				<tr>
-					<td>deparID</td>
+					<td>projectname</td>
 					<td><input name="projectname" class="easyui-validatebox" required="true"></td>
 				</tr>
 				<tr>
-					<td>groupID</td>
-					<td><input name="pprojected" class="easyui-validatebox" required="true"></td>
+					<td>pprojectid</td>
+					<td><input name="pprojectid" class="easyui-validatebox" required="true"></td>
 				</tr>
 				<tr>
-					<td>PProjectID</td>
+					<td>userid</td>
 					<td><input name="userid" class="easyui-validatebox" required="true"></td>
 				</tr>
 			</table> 
