@@ -14,6 +14,8 @@ public interface ProjectMapper {
     int insertSelective(Project record);
 
     Project selectByPrimaryKey(String projectid);
+    
+    public List<Project> selectProjectsByUserId(String userID);
 
     int updateByPrimaryKeySelective(Project record);
 

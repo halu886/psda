@@ -238,4 +238,10 @@
     *
     from project limit #{startPos},#{pageSize}
   </select>
+  
+  <select id="selectProjectsByUserId" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	select
+  	*
+  	from project where UserID = #{userID,jdbcType=CHAR}
+  </select>	
 </mapper>

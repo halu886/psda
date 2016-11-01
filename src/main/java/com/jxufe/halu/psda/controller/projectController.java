@@ -2,6 +2,7 @@ package com.jxufe.halu.psda.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -17,11 +18,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.jxufe.halu.psda.mapper.ProjectMapper;
 import com.jxufe.halu.psda.pojo.Project;
+import com.jxufe.halu.psda.util.TreeUtil;
 import com.sun.org.apache.xml.internal.serialize.Printer;
 
 @Controller
@@ -30,6 +33,24 @@ public class projectController {
 	
 	@Resource
 	private ProjectMapper projectMapper;
+	
+	@RequestMapping("/loginTest")
+	public String login(HttpServletRequest request,HttpServletResponse response){
+		return "project";
+	}
+	
+	/*
+	 * 说明：返回用户管理的完成任务以及未完成任务
+	 */
+	@RequestMapping("/projectTree")
+	public ModelAndView projectTree(HttpServletRequest request,
+			HttpServletResponse response) throws IOException{
+		List<Project> projects = projectMapper.selectProjectsByUserId("1");
+		TreeUtil treeUtil = new TreeUtil(projects);//调用工具类将任务列表转化成树结构
+		ModelAndView modelAndView = new ModelAndView("project");
+		modelAndView.addObject(treeUtil.nodeToJSONArray());
+		return modelAndView;
+	}
 	
 	@POST
 	@RequestMapping("/addProject")
@@ -105,3 +126,4 @@ public class projectController {
 		printWriter.close();
 	}
 }
+
