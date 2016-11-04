@@ -82,6 +82,7 @@ public class projectController {
 			json.put("Msg", "修改用户成功");
 			json.put("Success",true);
 		}
+		
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter printWriter = response.getWriter();
 		printWriter.println(json.toString());

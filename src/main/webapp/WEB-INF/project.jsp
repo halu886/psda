@@ -10,7 +10,7 @@
 <script type="text/javascript" src="plugin/easyUI/jquery.easyui.min.js"></script>
 <script type="text/javascript">
 	$('unDoProject').tree({
-		url:'tree_data.json'
+		url:<$>
 	});
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
