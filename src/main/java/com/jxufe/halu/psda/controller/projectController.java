@@ -10,6 +10,7 @@ import javax.json.Json;
 import javax.json.JsonObject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PathParam;
 
@@ -34,19 +35,21 @@ public class projectController {
 	@Resource
 	private ProjectMapper projectMapper;
 	
+	@GET
 	@RequestMapping("/loginTest")
-	public String login(HttpServletRequest request,HttpServletResponse response){
-		return "project";
+	public ModelAndView login(HttpServletRequest request,HttpServletResponse response){
+		return new ModelAndView("project");
 	}
 	
 	/*
-	 * ËµÃ÷£º·µ»ØÓÃ»§¹ÜÀíµÄÍê³ÉÈÎÎñÒÔ¼°Î´Íê³ÉÈÎÎñ
+	 * Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½Î´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
+	@GET
 	@RequestMapping("/projectTree")
 	public ModelAndView projectTree(HttpServletRequest request,
 			HttpServletResponse response) throws IOException{
 		List<Project> projects = projectMapper.selectProjectsByUserId("1");
-		TreeUtil treeUtil = new TreeUtil(projects);//µ÷ÓÃ¹¤¾ßÀà½«ÈÎÎñÁÐ±í×ª»¯³ÉÊ÷½á¹¹
+		TreeUtil treeUtil = new TreeUtil(projects);//ï¿½ï¿½ï¿½Ã¹ï¿½ï¿½ï¿½ï¿½à½«ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½á¹¹
 		ModelAndView modelAndView = new ModelAndView("project");
 		modelAndView.addObject(treeUtil.nodeToJSONArray());
 		return modelAndView;
@@ -58,10 +61,10 @@ public class projectController {
 			HttpServletResponse response) throws IOException {
 		JSONObject json = new JSONObject();
 		if(projectMapper.selectByPrimaryKey(project.getProjectid())!=null){
-			json.put("errorMsg", "ÐÂ½¨ÓÃ»§ÒÔÊ§°Ü,ÓÃ»§ÒÑ´æÔÚ");
+			json.put("errorMsg", "ï¿½Â½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Ê§ï¿½ï¿½,ï¿½Ã»ï¿½ï¿½Ñ´ï¿½ï¿½ï¿½");
 		} else{
 			projectMapper.insert(project);
-			json.put("Msg", "ÐÂ½¨ÓÃ»§³É¹¦");
+			json.put("Msg", "ï¿½Â½ï¿½ï¿½Ã»ï¿½ï¿½É¹ï¿½");
 			json.put("Success",true);
 		}
 		response.setContentType("text/html;charset=utf-8");
@@ -77,9 +80,9 @@ public class projectController {
             HttpServletResponse response,@PathParam("id")String id,Project project) throws IOException{
 		JSONObject json = new JSONObject();
 		if(projectMapper.updateByPrimaryKey(project)==0){
-			json.put("errorMsg", "ÐÞ¸ÄÓÃ»§ÒÔÊ§°Ü");
+			json.put("errorMsg", "ï¿½Þ¸ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Ê§ï¿½ï¿½");
 		} else{
-			json.put("Msg", "ÐÞ¸ÄÓÃ»§³É¹¦");
+			json.put("Msg", "ï¿½Þ¸ï¿½ï¿½Ã»ï¿½ï¿½É¹ï¿½");
 			json.put("Success",true);
 		}
 		
@@ -92,14 +95,14 @@ public class projectController {
 	}
 	
 	/*
-	 * @ËµÃ÷£º·ÖÒ³
+	 * @Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò³
 	 */
 	@RequestMapping("/projectList")
 	public void projectList(HttpServletRequest request,  
             HttpServletResponse response) throws Exception {
 		int page = ServletRequestUtils.getIntParameter(request, "page");
 		int row = ServletRequestUtils.getIntParameter(request, "rows");
-		List<Project> projects = projectMapper.selectProjectsByPage((--	page)*row, row);//»ñÈ¡Âú×ãµÄÌõ¼þµÄÊý¾Ý´Ó(--	page)*row¿ªÊ¼£¬»ñÈ¡row
+		List<Project> projects = projectMapper.selectProjectsByPage((--	page)*row, row);//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý´ï¿½(--	page)*rowï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½È¡row
 		JSONArray jsonArray = (JSONArray)JSONArray.toJSON(projects);
 		JSONObject result = new JSONObject();
 		result.put("rows", jsonArray);
@@ -117,7 +120,7 @@ public class projectController {
 			HttpServletResponse response,Project project) throws IOException{
 		JSONObject json = new JSONObject();
 		if(projectMapper.deleteByPrimaryKey(project.getProjectid())==0){
-			json.put("errorMSG", "É¾³ýÊ§°Ü");
+			json.put("errorMSG", "É¾ï¿½ï¿½Ê§ï¿½ï¿½");
 		}else {
 			json.put("success",true);
 		}

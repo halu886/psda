@@ -3,11 +3,11 @@
 pageEncoding="UTF-8"%>
 <html>
 <head>
-<link rel='stylesheet' type='text/css' href='plugin/easyUI/themes/default/easyui.css'>
-<link rel='stylesheet' type='text/css' href='plugin/easyUI/themes/icon.css'>
-<link rel='stylesheet' type='text/css' href='plugin/easyUI/demo/demo.css'>
-<script type="text/javascript" src="plugin/easyUI/jquery.min.js"></script>
-<script type="text/javascript" src="plugin/easyUI/jquery.easyui.min.js"></script>
+<link rel='stylesheet' type='text/css' href='resources/easyUI/themes/default/easyui.css'>
+<link rel='stylesheet' type='text/css' href='resources/easyUI/themes/icon.css'>
+<link rel='stylesheet' type='text/css' href='resources/easyUI/demo/demo.css'>
+<script type="text/javascript" src="resources/easyUI/jquery.min.js"></script>
+<script type="text/javascript" src="resources/easyUI/jquery.easyui.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script>

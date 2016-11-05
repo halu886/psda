@@ -3,11 +3,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link rel='stylesheet' type='text/css' href='plugin/easyUI/themes/default/easyui.css'>
-<link rel='stylesheet' type='text/css' href='plugin/easyUI/themes/icon.css'>
-<link rel='stylesheet' type='text/css' href='plugin/easyUI/demo/demo.css'>
-<script type="text/javascript" src="plugin/easyUI/jquery.min.js"></script>
-<script type="text/javascript" src="plugin/easyUI/jquery.easyui.min.js"></script>
+<link rel='stylesheet' type='text/css' href='resourcesn/easyUI/themes/default/easyui.css'>
+<link rel='stylesheet' type='text/css' href='resources/easyUI/themes/icon.css'>
+<link rel='stylesheet' type='text/css' href='resources/easyUI/demo/demo.css'>
+<script type="text/javascript" src="resources/easyUI/jquery.min.js"></script>
+<script type="text/javascript" src="resources/easyUI/jquery.easyui.min.js"></script>
 <script type="text/javascript">
 	$('unDoProject').tree({
 		url:<$>
