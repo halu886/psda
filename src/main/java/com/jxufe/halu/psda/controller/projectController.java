@@ -37,8 +37,9 @@ public class projectController {
 	
 	@GET
 	@RequestMapping("/loginTest")
-	public ModelAndView login(HttpServletRequest request,HttpServletResponse response){
-		return new ModelAndView("project");
+	public String login(HttpServletRequest request,HttpServletResponse response){
+//		return new ModelAndView("project");
+		return "project";
 	}
 	
 	/*
@@ -51,7 +52,8 @@ public class projectController {
 		List<Project> projects = projectMapper.selectProjectsByUserId("1");
 		TreeUtil treeUtil = new TreeUtil(projects);//���ù����ཫ�����б�ת�������ṹ
 		ModelAndView modelAndView = new ModelAndView("project");
-		modelAndView.addObject(treeUtil.nodeToJSONArray());
+		modelAndView.addObject("projectTree",treeUtil.nodeToJSONArray());
+		modelAndView.addObject("projects", projects);
 		return modelAndView;
 	}
 	

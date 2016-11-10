@@ -19,9 +19,15 @@
 		<a href="#" class="easyui-linkbutton" onclick="getSelected()">GetSelected</a>
 	</div>
 	<div class="easyui-panel" style="padding:5px">
-		<ul id="tt" class="easyui-tree" data-options="url:'tree_data1.json',method:'get',animate:true"></ul>
+		<ul id="tt" class="easyui-tree" ></ul>
 	</div>
 	<script type="text/javascript">
+		
+	$('#tt').tree({
+		data:[{"children":[{"children":[{"children":[{"children":[{"children":[],"id":"6","text":"6"}],"id":"4","text":"4"}],"id":"3","text":"3"},{"children":[],"id":"5","text":"5"}],"id":"2","text":"2"}],"id":"1","text":"1"}],
+	});
+	
+	
 		function collapseAll(){
 			$('#tt').tree('collapseAll');
 		}

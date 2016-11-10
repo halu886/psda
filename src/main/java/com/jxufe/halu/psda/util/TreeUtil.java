@@ -17,19 +17,19 @@ public class TreeUtil{
 		}
 	}
 	
-	public void add(Project project) {//½«×Ó½Úµã¼ÓÈëtreeÖÐ
+	public void add(Project project) {//ï¿½ï¿½ï¿½Ó½Úµï¿½ï¿½ï¿½ï¿½treeï¿½ï¿½
 		Node nodeProject = new Node(project);
-		if(rootList.size()==0){//ÅÐ¶ÏtreeÊÇ·ñÎª¿Õ
+		if(rootList.size()==0){//ï¿½Ð¶ï¿½treeï¿½Ç·ï¿½Îªï¿½ï¿½
 			rootList.add(nodeProject);
 			return ;
 		}
 		boolean done = true;
-		for(int i = 0;i < rootList.size()&& done;i++){//±éÀúËùÓÐµÄÊ÷
+		for(int i = 0;i < rootList.size()&& done;i++){//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½
 			/*
-			 * ÅÐ¶Ï¸Ã¸ù½ÚµãÊÇÓÐ·ñÎªÕâ¸öÈÎÎñµÄ×Ó½Úµã
+			 * ï¿½Ð¶Ï¸Ã¸ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½Ð·ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó½Úµï¿½
 			 */
 			Node root = rootList.get(i);
-			if(root.getElement().getPprojectid().equals(project.getProjectid())){
+			if(root.getpId().equals(project.getProjectid())){
 				nodeProject.setChildren(rootList.get(i));
 				done=false;
 			}
@@ -40,20 +40,20 @@ public class TreeUtil{
 
 	}
 	/*
-	 * ½«Ê÷½á¹¹×ª»¯³ÉJSON¸ñÊ½
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½á¹¹×ªï¿½ï¿½ï¿½ï¿½JSONï¿½ï¿½Ê½
 	 */
 	@SuppressWarnings("unchecked")
 	public JSONArray nodeToJSONArray() {
 		return new JSONArray((List)rootList);
 	}
 	/*
-	 * ±éÀúÊ÷
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public boolean searchTree(Node project,Node root){
 		if(root==null){
 			return false;
 		}
-		if(root.getElement().getProjectid().equals(project.getElement().getPprojectid())){ 
+		if(root.getId().equals(project.getpId())){ 
 			root.getChildren().add(project);
 			return true;
 			}
@@ -64,18 +64,28 @@ public class TreeUtil{
 	}
 }
 /*
- * Ò¶×Ó½Úµã
+ * Ò¶ï¿½Ó½Úµï¿½
  */
 class Node{
-	private Project element;
 	private List<Node> children = new ArrayList<Node>();
 	private String text;
+	private String id ;
+	private String pId;
 	
 	public Node() {}
 	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	public Node(Project element){
-		this.element = element;
 		this.text = element.getProjectname();
+		this.id = element.getProjectid();
+		this.pId = element.getPprojectid();
 	}
 	
 	public String getText() {
@@ -86,12 +96,14 @@ class Node{
 		this.text = text;
 	}
 
-	public Project getElement() {
-		return element;
+	public String getpId() {
+		return pId;
 	}
-	public void setElement(Project element) {
-		this.element = element;
+
+	public void setpId(String pId) {
+		this.pId = pId;
 	}
+
 	public List<Node> getChildren() {
 		return children;
 	}

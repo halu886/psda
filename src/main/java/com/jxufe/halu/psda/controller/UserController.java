@@ -21,7 +21,7 @@ public class UserController {
 	public String toIndex(HttpServletRequest request,Model model){
 		PUser user = this.pUserMapper.selectByPrimaryKey("1");
 		model.addAttribute("user", user);
-		return "user";
+		return "project";
 	}
 }
 
