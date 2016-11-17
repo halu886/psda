@@ -1,12 +1,16 @@
 package com.jxufe.halu.psda.pojo;
 
-public class PUser {
-    private String userid;
+import com.sun.istack.internal.NotNull;
 
+public class PUser {
+	
+	@NotNull
+    private String userid;
+	
     private String departid;
 
     private String groupname;
-
+    @NotNull
     private String password;
 
     public String getUserid() {
