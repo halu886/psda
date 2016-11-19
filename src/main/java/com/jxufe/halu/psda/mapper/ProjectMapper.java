@@ -17,6 +17,8 @@ public interface ProjectMapper {
     
     public List<Project> selectProjectsByUserId(String userID);
 
+    public List<Project> selectGroupProject(String userID);
+    
     int updateByPrimaryKeySelective(Project record);
 
     int updateByPrimaryKey(Project record);

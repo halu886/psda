@@ -24,13 +24,13 @@
     <div data-options="region:'east',title:'East',split:true" style="width:20%;"></div>
     <div data-options="region:'west',title:'West',split:true" style="width:20%;">
     	<div id="accordion" class="easyui-accordion" style="width:100%;height: 100%">
-    		<div title="任务管理" data-options="iconCls:'icon-save'" style="padding:10px;display: block;">
+    		<div title="任务管理" data-options="iconCls:'icon-save'" style="padding:10px;overflow:auto;">
 				<!--未完成任务-->
     			<ul id="unDoProject"  class="easyui-tree" ></ul>
     			<!-- 已完成任务 -->
 <!--     			<ul id="doProject"></ul>  -->
     		</div>
-    		<div title="部门管理" data-options="iconCls:'icon-save'" style="overflow:auto;padding:10px;">
+    		<div title="部门管理" data-options="iconCls:'icon-save',selected:true" style="overflow:auto;padding:10px;">
     		</div>
     		<div title="设置" data-options="iconCls:'icon-save'" style="overflow:auto;padding:10px;">
     		</div>
@@ -39,12 +39,22 @@
     <div data-options="region:'center',title:'center title'" style="padding:1%;background:#eee;"></div>
 </div>
 <script type="text/javascript">
-	
-	$('#unDoProject').tree({
-		data:${projectTree},
+// 	$('#unDoProject').tree({
+<%-- 		url:"<%= basePath%>projectController/projectTree", --%>
+// 		data:'${projectTree}'
+// 	});
+	$.ajax({
+		url:'projectController/projectTree',
+		type:'POST',
+		success: function(response){
+			alert("ok");
+			$('#unDoProject').tree({data:response});
+		},
+		error : function() {
+            alert("erroe");
+        }
 	});
-	
 </script>
-
+		
 </body>
 </html>

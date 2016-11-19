@@ -244,4 +244,12 @@
   	*
   	from project where UserID = #{userID,jdbcType=CHAR}
   </select>	
+ 
+  <select id="selectGroupProject" resultMap="BaseResultMap" parameterType="java.lang.String">
+	Select ProjectID,PProjectID,project.GroupID,project.DepartID,project.ClassID,project.UserID,ProjectName,
+	Requirement,Target,StepPlan,StepDo,StepCheck,StepAdapt,ProcessRatio,BeginTime,ScheduleEndTime,FinishTime
+	FROM `join` INNER JOIN project USING(GroupID)
+	INNER JOIN puser ON (`join`.UserID = puser.UserID)
+	where puser.UserID = #{userID,jdbcType=CHAR}
+  </select>
 </mapper>

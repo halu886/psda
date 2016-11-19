@@ -1,4 +1,4 @@
-package com.jxufe.halu.psda.controller;
+package com.jxufe.halu.psda.controller.project;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,12 +18,15 @@ import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.ServletRequestUtils;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.jxufe.halu.psda.controller.BaseController;
 import com.jxufe.halu.psda.mapper.ProjectMapper;
 import com.jxufe.halu.psda.pojo.PUser;
 import com.jxufe.halu.psda.pojo.Project;
@@ -32,31 +35,33 @@ import com.sun.org.apache.xml.internal.serialize.Printer;
 
 @Controller
 @RequestMapping("/projectController")
-//@SessionAttributes(value={"user"},types={PUser.class})
-public class projectController {
+public class projectController extends BaseController{
 	
 	@Resource
 	private ProjectMapper projectMapper;
 	
 	
-	/*
-	 * 请求任务界面并且保存projectTree属性
-	 */
+	
 	@GET
 	@RequestMapping("/project")
-	public ModelAndView login(HttpServletRequest request,HttpServletResponse response){
-		ModelAndView modelAndView = new ModelAndView("project");
-		modelAndView.addObject("projectTree",projectTree());
-//		modelAndView.addObject("projects", );
+	public ModelAndView project(HttpServletRequest request,HttpServletResponse response){
 		return new ModelAndView("project");
-//		return "project";
 	}
 	
 	/*
+	 * 请求任务界面并且保存projectTree属性
+	 */
+	@POST
+	@RequestMapping("projectTree")
+	public @ResponseBody JSONArray getProjectTree(HttpServletRequest request){
+		JSONArray projectTree = projectTree(getSessionUser(request));
+		return projectTree;
+	}
+	/*
 	 *将任务列表转换为树结构
 	 */
-	public  JSONArray projectTree(){
-		List<Project> projects = projectMapper.selectProjectsByUserId("1");
+	public  JSONArray projectTree(PUser user){
+		List<Project> projects = projectMapper.selectGroupProject(user.getUserid());
 		TreeUtil treeUtil = new TreeUtil(projects);//调用Util工具类
 		return treeUtil.nodeToJSONArray(); //返回树结构的jsonArray
 	}

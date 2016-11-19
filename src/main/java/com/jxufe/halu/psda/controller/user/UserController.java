@@ -1,4 +1,4 @@
-package com.jxufe.halu.psda.controller;
+package com.jxufe.halu.psda.controller.user;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
